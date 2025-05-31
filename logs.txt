@@ -1,0 +1,42 @@
+Stable - Version 1.00 - May 29                                            
+
+    - Things to add in next  .1 update
+        - Popular Dishes - added
+    - Things to Fix
+        - One selection for some inputs
+        - change popular dishes directly to generate 
+
+    Version 1.0.1 - May 30
+        - Bugs Fixed 
+            - Space between info on recipe display screen 
+            - labels not being bold
+
+Bugfix - Version 1.1.0 - May 30 Night
+    - Features 
+        - Popular Dishes selection - added
+        - One selection for some inputs - added
+        - change popular dishes directly to generate - added
+    Version 1.0.1 - May 30 Night
+        - Bugs Fixed 
+            - allignment on Customize/Extra Details Screen
+Upcoming - Version 1.2.0 - Due Date June 7 - WIP
+    - Features 
+        - Debugging
+        - Dialogs for errors 
+Upcoming - Version 1.3.0 - Due Date June 14 - WIP
+    - Features 
+        - Saving Recipe Functionality 
+
+Upcoming - Version 1.4.0 - Due Date June 21 - WIP
+    - Features 
+        - Editing Recipe Functionality 
+        
+
+
+
+
+
+
+
+
+        
