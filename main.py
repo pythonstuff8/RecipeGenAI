@@ -9,15 +9,24 @@ from kivy.uix.screenmanager import ScreenManager
 from screens.home_screen import MainScreen
 from screens.saved_recipes_screen import SavedRecipesScreen
 from screens.extra_details_screen import ExtraDetailsScreen
+from screens.recipe_display_screen import RecipeDisplayScreen
+from screens.loading_screen import LoadingContainer
+from kivy.properties import StringProperty
+from screens.popular_dishes_screen import PopularDishesScreen
+import subprocess
 
-
-
+subprocess.PIPE = -1  # noqa
+subprocess.STDOUT = -2  # noqa
+subprocess.DEVNULL = -3  # noqa
 class PantrifyApp(MDApp):
     def build(self):
         self.sm = ScreenManager()
-        self.sm.add_widget(MainScreen(name='main',md_bg_color=self.theme_cls.backgroundColor))
-        self.sm.add_widget(SavedRecipesScreen(name='savedrecipes',md_bg_color=self.theme_cls.backgroundColor))
-        self.sm.add_widget(ExtraDetailsScreen(name='extradetails',md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(MainScreen(name='main', md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(SavedRecipesScreen(name='savedrecipes', md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(ExtraDetailsScreen(name='extradetails', md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(RecipeDisplayScreen(name='recipe_display', md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(LoadingContainer(name='loading', md_bg_color=self.theme_cls.backgroundColor))
+        self.sm.add_widget(PopularDishesScreen(name='popular_dishes', md_bg_color=self.theme_cls.backgroundColor))
         self.theme_cls.primary_palette = "Blue"
         self.theme_cls.theme_style = "Light"
         return self.sm
