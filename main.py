@@ -7,7 +7,6 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
 from kivy.uix.screenmanager import ScreenManager
 from screens.home_screen import MainScreen
-from screens.saved_recipes_screen import SavedRecipesScreen
 from screens.extra_details_screen import ExtraDetailsScreen
 from screens.recipe_display_screen import RecipeDisplayScreen
 from screens.loading_screen import LoadingContainer
@@ -22,7 +21,6 @@ class PantrifyApp(MDApp):
     def build(self):
         self.sm = ScreenManager()
         self.sm.add_widget(MainScreen(name='main', md_bg_color=self.theme_cls.backgroundColor))
-        self.sm.add_widget(SavedRecipesScreen(name='savedrecipes', md_bg_color=self.theme_cls.backgroundColor))
         self.sm.add_widget(ExtraDetailsScreen(name='extradetails', md_bg_color=self.theme_cls.backgroundColor))
         self.sm.add_widget(RecipeDisplayScreen(name='recipe_display', md_bg_color=self.theme_cls.backgroundColor))
         self.sm.add_widget(LoadingContainer(name='loading', md_bg_color=self.theme_cls.backgroundColor))
