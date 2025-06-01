@@ -16,10 +16,10 @@ Stable - Version 1.1.0 - May 30 Night
         - Popular Dishes selection - added
         - One selection for some inputs - added
         - change popular dishes directly to generate - added
-    Version 1.0.1 - May 30 Night
+    Version 1.1.1 - May 30 Night
         - Bugs Fixed 
             - allignment on Customize/Extra Details Screen
-    Version 1.0.2 - June 1 Morning
+    Version 1.1.2 - June 1 Morning
         - Features added
             - Ability to add ingredients button, added
 Pre Release - Version 1.2.0 - Due Date June 7 - WIP
