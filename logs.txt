@@ -11,7 +11,7 @@ Stable - Version 1.00 - May 29
             - Space between info on recipe display screen 
             - labels not being bold
 
-Bugfix - Version 1.1.0 - May 30 Night
+Stable - Version 1.1.0 - May 30 Night
     - Features 
         - Popular Dishes selection - added
         - One selection for some inputs - added
@@ -19,7 +19,10 @@ Bugfix - Version 1.1.0 - May 30 Night
     Version 1.0.1 - May 30 Night
         - Bugs Fixed 
             - allignment on Customize/Extra Details Screen
-Upcoming - Version 1.2.0 - Due Date June 7 - WIP
+    Version 1.0.2 - June 1 Morning
+        - Features added
+            - Ability to add ingredients button, added
+Pre Release - Version 1.2.0 - Due Date June 7 - WIP
     - Features 
         - Debugging
         - Dialogs for errors 

@@ -15,6 +15,17 @@ from typing import List
 class MainScreen(MDScreen):
     reciped=None
     ip = None
+    allow_other_ingredients = True  # Class variable to track state
+    
+    def toggle_ingredients(self):
+        MainScreen.allow_other_ingredients = not MainScreen.allow_other_ingredients
+        btn_text = self.ids.toggle_text
+        if MainScreen.allow_other_ingredients:
+            btn_text.text = "Yes"
+            btn_text.text_color = "green"
+        else:
+            btn_text.text = "No"
+            btn_text.text_color = "red"
     def show_popular_dishes(self, *args):
         App.get_running_app().root.current = 'popular_dishes'
 
@@ -45,7 +56,8 @@ class MainScreen(MDScreen):
         extra_details = ExtraDetailsScreen.user_selections
         prompt = "Create a recipe using these ingredients:\n"
         prompt += "- " + "\n- ".join(ingredients) + "\n\n"
-        
+        if not MainScreen.allow_other_ingredients:
+            prompt += "Only use the ingredients listed above, do not add any other ingredients.\n\n"
         if extra_details:
             prompt += "Additional requirements:\n"
             
@@ -176,6 +188,23 @@ Format:
 
             Widget:
 
+            MDLabel:
+                text: "Ability to add other ingredients:"
+                halign: 'center'
+                spacing: 20
+                size_hint_y: None
+                height: self.texture_size[1] + 10
+
+            MDButton:
+                id: toggle_ingredients_btn
+                pos_hint: {"center_x": .5}
+                on_release: root.toggle_ingredients()
+
+                MDButtonText:
+                    id: toggle_text
+                    text: "Yes"
+                    theme_text_color: "Custom"
+                    text_color: "green"
 
             MDExtendedFabButton:
                 id: extra_notes_btn
