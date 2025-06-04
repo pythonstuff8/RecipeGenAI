@@ -158,7 +158,7 @@ Format:
                 height: "100dp"  # Add fixed height for top spacing
                         
             MDLabel:
-                text: "MealMakerAI"
+                text: "Recipe Assistant"
                 font_style: "Display"
                 role: "medium"
                 halign: 'center'
