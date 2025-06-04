@@ -16,6 +16,7 @@ class ExtraDetailsScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.active_chip=None
+        self.active_chip2=None
         self.setup_layout()
         
     def setup_layout(self):
@@ -257,7 +258,7 @@ class ExtraDetailsScreen(MDScreen):
             "Vietnamese"]
         for cusine in cusine_types:
             chip = CustomFilterChip(
-                text=cusine, on_release=self.handle_chip_selection
+                text=cusine, on_release=self.handle_chip_selection2
             )
             self.cusine_grid.add_widget(chip)
         equipment_label = MDLabel(
@@ -422,6 +423,11 @@ class ExtraDetailsScreen(MDScreen):
             self.active_chip.active = False
         
         self.active_chip = selected_chip if selected_chip.active else None
+    def handle_chip_selection2(self, selected_chip):
+        if self.active_chip2 and self.active_chip2 != selected_chip:
+            self.active_chip2.active = False
+        
+        self.active_chip2 = selected_chip if selected_chip.active else None
     def collect_selections(self):
   
             selections = {
@@ -442,15 +448,9 @@ class ExtraDetailsScreen(MDScreen):
                     selections["cusine_types"].append(child.text)
             for child in self.allergies_grid.children:
                 if isinstance(child, CustomFilterChip) and child.active:
-                    if child.text != "Tree Nuts":
                         selections["allergies"].append(child.text)
             
-            if any(child for child in self.allergies_grid.children 
-                if isinstance(child, CustomFilterChip) and 
-                child.text == "Tree Nuts" and child.active):
-                for child in self.tree_nuts_dropdown.children:
-                    if isinstance(child, CustomFilterChip) and child.active:
-                        selections["tree_nuts"].append(child.text)
+
 
             for child in self.diet_grid.children:
                 if isinstance(child, CustomFilterChip) and child.active:
