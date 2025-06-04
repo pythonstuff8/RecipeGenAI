@@ -12,14 +12,15 @@ from kivy.app import App
 from kivymd.uix.gridlayout import MDGridLayout
 from kivy.uix.widget import Widget
 from kivymd.uix.dialog import MDDialog, MDDialogIcon, MDDialogHeadlineText, MDDialogSupportingText, MDDialogButtonContainer
+from utils.api import delete_recipe_image
 class RecipeDisplayScreen(MDScreen):
     recipe_data = None
     ip = None
-
     @classmethod
     def display_recipe(cls, recipe_data, ip):
         cls.recipe_data = recipe_data
         cls.ip = ip
+        
 
         print("Displaying recipe data:", recipe_data)
 
@@ -56,7 +57,7 @@ class RecipeDisplayScreen(MDScreen):
             pos_hint={"center_x": 0.1},
             size_hint_y=None,
             height="48dp",
-            on_release=self.go_back_home
+            on_release=self.back_button_callback
         )
         layout.add_widget(back_button)
 
@@ -176,7 +177,7 @@ class RecipeDisplayScreen(MDScreen):
             instance.icon = "content-save-plus"
     def go_rvs(self, instance):
         App.get_running_app().root.current = "recipe_view_screen"
-    def show_alert_dialog(self, title="", icon="close", subtext=""):
+    def back_button_callback(self, title="", icon="close", subtext=""):
         self.dialog=MDDialog(
             MDDialogIcon(
                 icon="alert-circle", pos_hint={'center_x': 0.9}
@@ -201,8 +202,12 @@ class RecipeDisplayScreen(MDScreen):
                 ),
                 spacing="8dp",
             ),
-        ).open()
+        )
+        self.dialog.open()
 
     def go_back_home(self, instance):
-        self.dialog.dismiss()
+        if hasattr(self, 'dialog') and self.dialog:
+            self.dialog.dismiss()
+            self.dialog = None
+        delete_recipe_image(file_name=RecipeDisplayScreen.recipe_data['image_name'])
         App.get_running_app().root.current = 'main'

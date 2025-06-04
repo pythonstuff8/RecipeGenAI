@@ -27,9 +27,9 @@ class PopularDishesScreen(MDScreen):
         self.active_chip=None
         self.setup_layout()
         
-    def show_alert_dialog(self, title="", subtext=""):
-        MDDialog(
-          
+    def show_alert_dialog(self, icon, title="", subtext=""):
+        self.dialog=MDDialog(
+
             MDDialogHeadlineText(
                 text=title,
             ),
@@ -45,7 +45,8 @@ class PopularDishesScreen(MDScreen):
                 ),
           
                ),
-        ).open()
+        )
+        self.dialog.open()
 
     def setup_layout(self):
         scroll_view = ScrollView()

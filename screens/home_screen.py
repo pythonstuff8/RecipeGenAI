@@ -19,9 +19,9 @@ class MainScreen(MDScreen):
     reciped=None
     ip = None
     allow_other_ingredients = True  # Class variable to track state
-    def show_alert_dialog(self, title="", subtext=""):
-        MDDialog(
-          
+    def show_alert_dialog(self, icon, title="", subtext=""):
+        self.dialog=MDDialog(
+
             MDDialogHeadlineText(
                 text=title,
             ),
@@ -36,10 +36,9 @@ class MainScreen(MDScreen):
                     on_release=lambda x: self.dialog.dismiss()
                 ),
           
-               
-            ),
-        ).open()
-
+               ),
+        )
+        self.dialog.open()
     def toggle_ingredients(self):
         MainScreen.allow_other_ingredients = not MainScreen.allow_other_ingredients
         btn_text = self.ids.toggle_text
