@@ -10,13 +10,35 @@ from kivy.clock import Clock
 from functools import partial
 import time
 from typing import List
-
-
+import threading
+from kivymd.uix.dialog import MDDialog, MDDialogIcon, MDDialogHeadlineText, MDDialogSupportingText
+from kivymd.uix.dialog import MDDialogButtonContainer
+from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.widget import MDWidget
 class MainScreen(MDScreen):
     reciped=None
     ip = None
     allow_other_ingredients = True  # Class variable to track state
-    
+    def show_alert_dialog(self, icon, title="", subtext=""):
+        self.dialog=MDDialog(
+
+            MDDialogHeadlineText(
+                text=title,
+            ),
+            MDDialogSupportingText(
+                text=subtext,
+            ),
+            MDDialogButtonContainer(
+                MDWidget(),
+                MDButton(
+                    MDButtonText(text="Done"),
+                    style="text",
+                    on_release=lambda x: self.dialog.dismiss()
+                ),
+          
+               ),
+        )
+        self.dialog.open()
     def toggle_ingredients(self):
         MainScreen.allow_other_ingredients = not MainScreen.allow_other_ingredients
         btn_text = self.ids.toggle_text
@@ -30,16 +52,22 @@ class MainScreen(MDScreen):
         App.get_running_app().root.current = 'popular_dishes'
 
     def generate_recipe(self, *args):
+        # Switch to loading screen immediately
         App.get_running_app().root.current = 'loading'
-        Clock.schedule_once(self.do_generate_recipe, 1)
+        # Start the recipe generation in a daemon thread
+        threading.Thread(target=self._do_generate_recipe, daemon=True).start()
 
-    def do_generate_recipe(self, *args):
-       
-            recipe_data,ip = self.get_recipe_prompt()
-            MainScreen.reciped = recipe_data
-            MainScreen.ip = ip
-            RecipeDisplayScreen.display_recipe(recipe_data,ip)  
-            App.get_running_app().root.current = 'recipe_display'
+    def _do_generate_recipe(self):
+        # This call is blocking, but runs in a separate thread now
+        recipe_data, ip = self.get_recipe_prompt()
+        # Schedule a UI update after recipe generation is complete
+        Clock.schedule_once(lambda dt: self._update_recipe_screen(recipe_data, ip), 0)
+
+    def _update_recipe_screen(self, recipe_data, ip):
+        MainScreen.reciped = recipe_data
+        MainScreen.ip = ip
+        RecipeDisplayScreen.display_recipe(recipe_data, ip)
+        App.get_running_app().root.current = 'recipe_display'
     
 
 
@@ -133,7 +161,9 @@ Format:
         try:
             response = gen_recipe(prompt, api_key="AIzaSyBySkCG5yLgtz4IANJySl5Y59Xxt9pdVWI")
         except:
+            
             App.get_running_app().root.current = 'main'
+            self.show_alert_dialog(title="Error", subtext="Failed to generate recipe. Please Try Again")
 
       
 
@@ -189,7 +219,7 @@ Format:
             Widget:
 
             MDLabel:
-                text: "Ability to add other ingredients:"
+                text: "Can add more for flavor?"
                 halign: 'center'
                 spacing: 20
                 size_hint_y: None
