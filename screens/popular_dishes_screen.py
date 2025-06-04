@@ -15,6 +15,8 @@ from kivy.app import App
 from screens.recipe_display_screen import RecipeDisplayScreen
 from utils.api import gen_recipe, safe_extract_json
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDExtendedFabButton, MDExtendedFabButtonIcon, MDExtendedFabButtonText
+from kivymd.uix.dialog import MDDialogIcon, MDDialogHeadlineText, MDDialogSupportingText, MDDialogButtonContainer
 
 class PopularDishesScreen(MDScreen):
     pd_selections = {}
@@ -25,7 +27,26 @@ class PopularDishesScreen(MDScreen):
         self.active_chip=None
         self.setup_layout()
         
-        
+    def show_alert_dialog(self, title="", subtext=""):
+        MDDialog(
+          
+            MDDialogHeadlineText(
+                text=title,
+            ),
+            MDDialogSupportingText(
+                text=subtext,
+            ),
+            MDDialogButtonContainer(
+                MDWidget(),
+                MDButton(
+                    MDButtonText(text="Done"),
+                    style="text",
+                    on_release=lambda x: self.dialog.dismiss()
+                ),
+          
+               ),
+        ).open()
+
     def setup_layout(self):
         scroll_view = ScrollView()
         
@@ -107,7 +128,12 @@ class PopularDishesScreen(MDScreen):
                 on_release=self.handle_chip_selection  # Add callback for selection
             )
             self.pd_grid.add_widget(chip)
-     
+        fab_button = MDExtendedFabButton(
+            MDExtendedFabButtonIcon(icon="pencil-plus"),
+            MDExtendedFabButtonText(text="   Customize    ", opacity=1),
+            fab_state="expand",
+            on_release=self.go_extra_details
+        )
         self.notes = MDTextField(
             MDTextFieldHintText(text="Enter any other stuff that you want to add"),
             multiline=True,
@@ -120,8 +146,8 @@ class PopularDishesScreen(MDScreen):
         layout.add_widget(spacer)
         layout.add_widget(self.pd_grid)
         layout.add_widget(MDLabel(text="",size_hint_y=None, height="50dp", opacity=0))
-
-
+        layout.add_widget(fab_button)
+        layout.add_widget(MDLabel(text="",size_hint_y=None, height="50dp", opacity=0))
         layout.add_widget(self.notes)
         layout.add_widget(MDButton(
             MDButtonText(text="Generate Your Recipe"), MDButtonIcon(icon="chef-hat"), pos_hint={'center_x': 0.5, 'y': 0},
@@ -143,7 +169,7 @@ class PopularDishesScreen(MDScreen):
             #         buttons=[],
             #     )
             # self.dialog.open()
-            print("Please select a dish first")
+            self.show_alert_dialog(title="No Recipe Selected", subtext="Please select a popular dish before generating a recipe.", icon="close")
         
             return None
         App.get_running_app().root.current = 'loading'
@@ -249,6 +275,7 @@ Format:
             response = gen_recipe(prompt, api_key="AIzaSyBySkCG5yLgtz4IANJySl5Y59Xxt9pdVWI")
         except:
             App.get_running_app().root.current = 'main'
+            self.show_alert_dialog(title="Error", subtext="Failed to generate recipe. Please Try Again")
 
       
 
@@ -281,3 +308,5 @@ Format:
         print("\n=====================")
         
         return pd_selections
+    def go_extra_details(self, *args):
+        App.get_running_app().root.current = 'extradetails'

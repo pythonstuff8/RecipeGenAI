@@ -2,7 +2,8 @@ from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.uix.scrollview import ScrollView
-
+from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.widget import MDWidget
 from kivymd.uix.button import MDIconButton
 from kivymd.uix.label import MDLabel
 from kivy.uix.image import AsyncImage, Image
@@ -10,6 +11,7 @@ from kivy.metrics import dp
 from kivy.app import App
 from kivymd.uix.gridlayout import MDGridLayout
 from kivy.uix.widget import Widget
+from kivymd.uix.dialog import MDDialog, MDDialogIcon, MDDialogHeadlineText, MDDialogSupportingText, MDDialogButtonContainer
 class RecipeDisplayScreen(MDScreen):
     recipe_data = None
     ip = None
@@ -174,5 +176,33 @@ class RecipeDisplayScreen(MDScreen):
             instance.icon = "content-save-plus"
     def go_rvs(self, instance):
         App.get_running_app().root.current = "recipe_view_screen"
+    def show_alert_dialog(self, title="", icon="close", subtext=""):
+        self.dialog=MDDialog(
+            MDDialogIcon(
+                icon="alert-circle", pos_hint={'center_x': 0.9}
+            ),
+            MDDialogHeadlineText(
+                text="Go Back",
+            ),
+            MDDialogSupportingText(
+                text="Are you sure you want to go back? Your recipe will be lost.",
+            ),
+            MDDialogButtonContainer(
+                MDWidget(),
+                MDButton(
+                    MDButtonText(text="No"),
+                    style="text",
+                    on_release=lambda x: self.dialog.dismiss()
+                ),
+                MDButton(
+                    MDButtonText(text="Yes"),
+                    style="text",
+                    on_release=self.go_back_home
+                ),
+                spacing="8dp",
+            ),
+        ).open()
+
     def go_back_home(self, instance):
+        self.dialog.dismiss()
         App.get_running_app().root.current = 'main'
