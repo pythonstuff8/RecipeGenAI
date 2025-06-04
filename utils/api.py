@@ -5,6 +5,21 @@ import base64
 import boto3
 import io
 import uuid
+def delete_s3(bucket="mealmakeraiimages"):
+    s3_client = boto3.client('s3',
+        aws_access_key_id='AKIAREZ56TUXCCKA424C',
+        aws_secret_access_key='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',
+        region_name='us-east-1'
+    )
+    
+    # List all objects in the bucket
+    objects = s3_client.list_objects_v2(Bucket=bucket)
+    print(objects)
+    # Delete all objects
+    if 'Contents' in objects:
+        for obj in objects['Contents']:
+            s3_client.delete_object(Bucket=bucket, Key=obj['Key'])
+            print(f"Deleted {obj['Key']}")
 def upload_to_s3(image_bytes, file_name, bucket="mealmakeraiimages"):
     """Upload a file to an S3 bucket and return the URL"""
     s3_client = boto3.client('s3',
@@ -107,7 +122,7 @@ def gen_recipe(prompt, api_key):
                 image_bytes = base64.b64decode(base64_data)
                 unique_id = uuid.uuid4().hex[:8]
                 file_name = f"{recipe_data['title'].replace(' ', '_')}_{unique_id}.png"
-                
+                recipe_data['image_name'] = file_name
                 # Upload to S3 instead of saving locally
                 s3_url = upload_to_s3(image_bytes, file_name)
                 print(s3_url)
@@ -129,3 +144,16 @@ def gen_recipe(prompt, api_key):
         print(f"Error generating recipe: {response.status_code}")
         print(response.text)
         return None,"images/error.png"
+def delete_recipe_image(file_name, bucket="mealmakeraiimages"):
+    s3_client = boto3.client('s3',
+        aws_access_key_id='AKIAREZ56TUXCCKA424C',
+        aws_secret_access_key='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',
+        region_name='us-east-1'
+    )
+    try:
+        s3_client.delete_object(Bucket=bucket, Key=file_name)
+        print(f"Deleted recipe image: {file_name}")
+        objects = s3_client.list_objects_v2(Bucket=bucket)
+        print(objects)
+    except Exception as e:
+        print(f"Error deleting recipe image: {e}")
