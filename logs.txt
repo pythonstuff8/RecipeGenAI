@@ -34,11 +34,11 @@ stable - Version 1.5.0 - June 5
     - Features 
         - Bug fixes
         - version bump/changed to match ios
-Upcoming - Version 1.6.0 - Due Date June 14 
+Upcoming - Version 1.7.0 - Due Date June 31 
     - Features 
-        - Saving Recipe Functionality 
+        - Saving Recipe Functionality(extra version because it is a major addition/change) 
 
-Upcoming - Version 1.7.0 - Due Date June 21 
+Upcoming - Version 2(Final/only bug fix updates after this) - Due Date July 31 
     - Features 
         - Editing Recipe Functionality 
         
