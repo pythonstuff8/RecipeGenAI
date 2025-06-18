@@ -198,6 +198,9 @@ Builder.load_string('''
                 spacing: 20
                 size_hint_y: None
                 height: "100dp"
+                    
+
+
             MDLabel:
                 text: "RecipeGen AI"
                 font_style: "Display"
