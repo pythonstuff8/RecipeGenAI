@@ -112,10 +112,10 @@ class RecipeDisplayScreen(MDScreen):
             ("Cuisine", recipe["cuisine"]),
             ("Servings", recipe["servings"]),
             ("Course", recipe["meal_type"]),
-            ("Calories", f"{recipe.get("calorie_count", "N/A")} calories per serving"),
-            ("Protein", f"{recipe.get("macros", {}).get("protein", "N/A")} protein per serving"),
-            ("Carbs", f"{recipe.get("macros", {}).get("carbohydrates", "N/A")} carbs per serving"),
-            ("Fat", f"{recipe.get("macros", {}).get("fat", "N/A")} fat per serving"),
+            ("Calories", f"{recipe["calorie_count"]} calories per serving"),
+            ("Protein", f"{recipe["macros"]["protein"]} protein per serving"),
+            ("Carbs", f"{recipe["macros"]["carbohydrates"]} carbs per serving"),
+            ("Fat", f"{recipe["macros"]["fat"]} fat per serving"),
 
         ]
 
