@@ -27,14 +27,19 @@ Stable - Version 1.2.0 - June 3
     - Features 
         - Customize Button on Popular Dishes
         - Progress Bar
-stable - Version 1.3.0 - June 4
+Stable - Version 1.3.0 - June 4
     - Features 
         - Debugging
         - Dialogs for errors 
-stable - Version 1.5.0 - June 5
+Stable - Version 1.5.0 - June 5
     - Features 
         - Bug fixes
         - version bump/changed to match ios
+
+Stable - Version 1.6.0 - June 18
+    - Features 
+        - Calories and Macros 
+        
 Upcoming - Version 1.7.0 - Due Date June 31 
     - Features 
         - Saving Recipe Functionality(extra version because it is a major addition/change) 
