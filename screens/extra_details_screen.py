@@ -4,7 +4,7 @@ from widgets.custom_widgets import CustomFilterChip
 from kivymd.uix.chip import MDChip
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.label import MDLabel
-from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+from kivymd.uix.textfield import MDTextField,MDTextFieldHintText
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDIconButton, MDButton, MDButtonText
 from kivymd.uix.gridlayout import MDGridLayout
@@ -171,6 +171,14 @@ class ExtraDetailsScreen(MDScreen):
                 self.time_slider_label, options.get(int(val), "")
             )
         )
+        self.calories_slider_label = MDLabel(
+            text="Calories",
+            halign="center",
+            font_style="Title",
+            role="large",
+            size_hint_y=None,
+            height="48dp",
+        )
 
         meal_label = MDLabel(
             text="Meal Type",
@@ -280,6 +288,181 @@ class ExtraDetailsScreen(MDScreen):
         )
         self.serving_size.text = "4"
 
+        # Calories input fields (side by side)
+        calories_box = MDBoxLayout(
+            orientation="horizontal",
+            spacing=10,
+            size_hint_y=None,
+            height="48dp",
+        )
+        self.calories_min_field = MDTextField(
+            MDTextFieldHintText(
+                text="Minimum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        dash_label = MDLabel(
+            text="-",
+            halign="center",
+            valign="middle",
+            size_hint_x=0.1,
+        )
+        self.calories_max_field = MDTextField(
+            MDTextFieldHintText(
+                text="Maximum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        calories_box.add_widget(self.calories_min_field)
+        calories_box.add_widget(dash_label)
+        calories_box.add_widget(self.calories_max_field)
+
+        calories_label = MDLabel(
+            text="Calories Per Serving",
+            halign="center",
+            size_hint_y=None,
+            font_style="Title",
+            role="large",
+        )
+        macros_layout = MDBoxLayout(
+            orientation="vertical",
+            spacing=10,
+            size_hint_y=None,
+
+        )
+        macros_label = MDLabel(
+            text="Macros",
+            halign="center",
+            font_style="Title",
+            role="large",
+            size_hint_y=None,
+            height="32dp",
+        )
+        macros_layout.add_widget(macros_label)
+        carbs_layout = MDBoxLayout(
+            orientation="horizontal",
+            spacing=10,
+            size_hint_y=None,
+            height="48dp",
+        )
+        carbs_label = MDLabel(
+            text="Carbs",
+            halign="center",
+            size_hint_y=None,
+            font_style="Title",
+            role="medium",
+        )
+        self.carbs_min_field = MDTextField(
+            MDTextFieldHintText(
+                text="Minimum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        dash_label = MDLabel(
+            text="-",
+            halign="center",
+            valign="middle",
+            size_hint_x=0.1,
+        )
+        self.carbs_max_field = MDTextField(
+            MDTextFieldHintText(
+                text="Maximum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        carbs_layout.add_widget(self.carbs_min_field)
+        carbs_layout.add_widget(dash_label)
+        carbs_layout.add_widget(self.carbs_max_field)
+        macros_layout.add_widget(carbs_label)
+        macros_layout.add_widget(carbs_layout)
+        protein_layout = MDBoxLayout(
+            orientation="horizontal",
+            spacing=10,
+            size_hint_y=None,
+            height="48dp",
+        )
+        protein_label = MDLabel(
+            text="Protein",
+            halign="center",
+            size_hint_y=None,
+            font_style="Title",
+            role="medium",
+        )
+        self.protein_min_field = MDTextField(
+            MDTextFieldHintText(
+                text="Minimum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        dash_label = MDLabel(
+            text="-",
+            halign="center",
+            valign="middle",
+            size_hint_x=0.1,
+        )
+        self.protein_max_field = MDTextField(
+            MDTextFieldHintText(
+                text="Maximum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        protein_layout.add_widget(self.protein_min_field)
+        protein_layout.add_widget(dash_label)
+        protein_layout.add_widget(self.protein_max_field)
+        macros_layout.add_widget(protein_label)
+        macros_layout.add_widget(protein_layout)
+        fat_layout = MDBoxLayout(
+            orientation="horizontal",
+            spacing=10,
+            size_hint_y=None,
+            height="48dp",
+        )
+        fat_label = MDLabel(
+            text="Fat",
+            halign="center",
+            size_hint_y=None,
+            font_style="Title",
+            role="medium",
+        )
+        self.fat_min_field = MDTextField(
+            MDTextFieldHintText(
+                text="Minimum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        dash_label = MDLabel(
+            text="-",
+            halign="center",
+            valign="middle",
+            size_hint_x=0.1,
+        )
+        self.fat_max_field = MDTextField(
+            MDTextFieldHintText(
+                text="Maximum",
+            ),
+            text="N/A",
+            input_filter="int",
+            size_hint_x=0.45,
+        )
+        fat_layout.add_widget(self.fat_min_field)
+        fat_layout.add_widget(dash_label)
+        fat_layout.add_widget(self.fat_max_field)
+        macros_layout.add_widget(fat_label)
+        macros_layout.add_widget(fat_layout)
         notes_label = MDLabel(
             text="Other Notes",
             halign="center",
@@ -316,6 +499,10 @@ class ExtraDetailsScreen(MDScreen):
         layout.add_widget(time_label)
         layout.add_widget(self.time_slider_label)
         layout.add_widget(slider)
+        layout.add_widget(calories_label)
+        layout.add_widget(calories_box)
+        layout.add_widget(MDLabel(text="", size_hint_y=None, height="320dp", opacity=0))
+        layout.add_widget(macros_layout)
         layout.add_widget(notes_label)
         layout.add_widget(self.notes)
         layout.add_widget(
@@ -372,6 +559,14 @@ class ExtraDetailsScreen(MDScreen):
             "notes": self.notes.text,
             "time_constraint": self.time_slider_label.text,
             "cusine_types": [],
+            "calories_min": int(self.calories_min_field.text or 0),
+            "calories_max": int(self.calories_max_field.text or 0),
+            "carbs_min": int(self.carbs_min_field.text or 0),
+            "carbs_max": int(self.carbs_max_field.text or 0),
+            "protein_min": int(self.protein_min_field.text or 0),
+            "protein_max": int(self.protein_max_field.text or 0),
+            "fat_min": int(self.fat_min_field.text or 0),
+            "fat_max": int(self.fat_max_field.text or 0),
         }
 
         for child in self.cusine_grid.children:

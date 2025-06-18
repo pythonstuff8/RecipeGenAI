@@ -210,6 +210,22 @@ class PopularDishesScreen(MDScreen):
         prompt = f"Create a {popular_dishes['popular_dishes']} recipe"
         if extra_details:
             prompt += "Additional requirements:\n"
+            if extra_details.get("fat_min"):
+                prompt += f"Minimum Fat Per Serving Of The Dish Will Be: {extra_details['fat_min']}\n"
+            if extra_details.get("fat_max"):
+                prompt += f"Maximum Fat Per Serving Of The Dish Will Be: {extra_details['fat_max']}\n"
+            if extra_details.get("protein_min"):
+                prompt += f"Minimum Protein Per Serving Of The Dish Will Be: {extra_details['protein_min']}\n"
+            if extra_details.get("protein_max"):
+                prompt += f"Maximum Protein Per Serving Of The Dish Will Be: {extra_details['protein_max']}\n"
+            if extra_details.get("carbs_min"):
+                prompt += f"Minimum Carbohydrates Per Serving Of The Dish Will Be: {extra_details['carbs_min']}\n"
+            if extra_details.get("carbs_max"):
+                prompt += f"Maximum Carbohydrates Per Serving Of The Dish Will Be: {extra_details['carbs_max']}\n"
+            if extra_details.get("calories_min"):
+                prompt += f"Minimum Calories Per Serving Of The Dish Will Be: {extra_details['calories_min']}\n"
+            if extra_details.get("calories_max"):
+                prompt += f"Maximum Calories Per Serving Of The Dish Will Be: {extra_details['calories_max']}\n"
             if extra_details.get("allergies"):
                 prompt += "\nAllergies/Restrictions to avoid:\n"
                 prompt += "- " + "\n- ".join(extra_details["allergies"])
@@ -245,7 +261,7 @@ Generate a detailed recipe.
 
 Format:
 {
-  "cuisine": "The chosen or inferred cuisine type",
+  "cuisine": "The chosen cuisine type",
   "title": "Recipe Title",
   "description": "A detailed description or introduction to the recipe.",
   "image_description": "A very detailed description to generate the image for the recipe.",
@@ -253,6 +269,12 @@ Format:
   "prep_time": "Time to prepare",
   "cook_time": "Time to cook",
   "total_time": "Total time",
+  "calorie_count": "CALORIES PER SERVING; example: 500, DO NOT include the word ,calories, in ur response",
+  "macros": {
+    "protein": "Amount of protein PER SERVING; example: 10g",
+    "carbohydrates": "Amount of carbohydrates PER SERVING; example: 15g",
+    "fat": "Amount of fat PER SERVING; example: 5g"
+  },
   "ingredients": [
     "Ingredient 1",
     "Ingredient 2"

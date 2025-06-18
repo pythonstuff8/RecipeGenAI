@@ -86,6 +86,22 @@ class MainScreen(MDScreen):
 
         if extra_details:
             prompt += "Additional requirements:\n"
+            if extra_details.get("fat_min"):
+                prompt += f"Minimum Fat Per Serving Of The Dish Will Be: {extra_details['fat_min']}\n"
+            if extra_details.get("fat_max"):
+                prompt += f"Maximum Fat Per Serving Of The Dish Will Be: {extra_details['fat_max']}\n"
+            if extra_details.get("protein_min"):
+                prompt += f"Minimum Protein Per Serving Of The Dish Will Be: {extra_details['protein_min']}\n"
+            if extra_details.get("protein_max"):
+                prompt += f"Maximum Protein Per Serving Of The Dish Will Be: {extra_details['protein_max']}\n"
+            if extra_details.get("carbs_min"):
+                prompt += f"Minimum Carbohydrates Per Serving Of The Dish Will Be: {extra_details['carbs_min']}\n"
+            if extra_details.get("carbs_max"):
+                prompt += f"Maximum Carbohydrates Per Serving Of The Dish Will Be: {extra_details['carbs_max']}\n"
+            if extra_details.get("calories_min"):
+                prompt += f"Minimum Calories Per Serving Of The Dish Will Be: {extra_details['calories_min']}\n"
+            if extra_details.get("calories_max"):
+                prompt += f"Maximum Calories Per Serving Of The Dish Will Be: {extra_details['calories_max']}\n"
             if extra_details.get("allergies"):
                 prompt += "\nAllergies/Restrictions to avoid:\n"
                 prompt += "- " + "\n- ".join(extra_details["allergies"])
@@ -97,10 +113,10 @@ class MainScreen(MDScreen):
                 prompt += "\n\nDietary Preferences:\n"
                 prompt += "- " + "\n- ".join(extra_details["diet_preferences"])
             if extra_details.get("meal_types"):
-                prompt += "\n\nPreferred Meal Type:\n"
+                prompt += "\n\nThe Meal Type Will Be:\n"
                 prompt += "- " + "\n- ".join(extra_details["meal_types"])
             if extra_details.get("cuisine_types"):
-                prompt += "\n\nPreferred Cuisine Type:\n"
+                prompt += "\n\nThe Dish Cuisine Type Will Be:\n"
                 prompt += "- " + "\n- ".join(extra_details["cuisine_types"])
             if extra_details.get("equipment"):
                 prompt += "\n\nAvailable Equipment:\n"
@@ -117,7 +133,7 @@ Return the recipe strictly as a JSON object — no ```json, no explanations, no 
 
 Format:
 {
-  "cuisine": "The chosen or inferred cuisine type",
+  "cuisine": "The chosen cuisine type",
   "title": "Recipe Title",
   "description": "A detailed description or introduction to the recipe.",
   "image_description": "A very detailed description to generate the image for the recipe.",
@@ -125,6 +141,16 @@ Format:
   "prep_time": "Time to prepare",
   "cook_time": "Time to cook",
   "total_time": "Total time",
+  "ingredients": [
+    "Ingredient 1",
+    "Ingredient 2"
+  ],
+  "calorie_count": "CALORIES PER SERVING; example: 500, DO NOT include the word ,calories, in ur response",
+  "macros": {
+    "protein": "Amount of protein PER SERVING; example: 10g",
+    "carbohydrates": "Amount of carbohydrates PER SERVING; example: 15g",
+    "fat": "Amount of fat PER SERVING; example: 5g"
+  },
   "ingredients": [
     "Ingredient 1",
     "Ingredient 2"
@@ -148,6 +174,7 @@ Format:
             response = gen_recipe(
                 prompt, api_key="AIzaSyBySkCG5yLgtz4IANJySl5Y59Xxt9pdVWI"
             )
+            print(response)
         except Exception:
             App.get_running_app().root.current = "main"
             self.show_alert_dialog(
@@ -172,7 +199,7 @@ Builder.load_string('''
                 size_hint_y: None
                 height: "100dp"
             MDLabel:
-                text: "Meal Maker AI"
+                text: "RecipeGen AI"
                 font_style: "Display"
                 role: "medium"
                 halign: 'center'
@@ -197,7 +224,7 @@ Builder.load_string('''
                 on_release: app.add_input_field()
             Widget:
             MDLabel:
-                text: "Can add more for flavor?"
+                text: "More Ingredients for flavor?"
                 halign: 'center'
                 spacing: 20
                 size_hint_y: None

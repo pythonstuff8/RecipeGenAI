@@ -20,6 +20,7 @@ Stable - Version 1.1.0 - May 30 Night
         - Bugs Fixed 
             - allignment on Customize/Extra Details Screen
     Version 1.1.2 - June 1 Morning
+        RELEASED ON THE APP STORE 
         - Features added
             - Ability to add ingredients button, added
 Stable - Version 1.2.0 - June 3

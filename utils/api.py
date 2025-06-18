@@ -70,13 +70,14 @@ def gen_recipe(prompt, api_key):
         "Content-Type": "application/json",
         "Authorization": f"Bearer {OPENAI_API_KEY}",
     }
-    payload = {"model": "gpt-4.1-nano", "input": prompt}
+    payload = {"model": "gpt-4.1-mini", "input": prompt}
 
     response = requests.post(url, headers=headers, json=payload)
     if response.status_code == 200:
         recipe_data = safe_extract_json(
             response.json()["output"][0]["content"][0]["text"]
         )
+        print(recipe_data)
         image_prompt = recipe_data["image_description"]
 
         url = (

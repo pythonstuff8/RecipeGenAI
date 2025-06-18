@@ -112,6 +112,11 @@ class RecipeDisplayScreen(MDScreen):
             ("Cuisine", recipe["cuisine"]),
             ("Servings", recipe["servings"]),
             ("Course", recipe["meal_type"]),
+            ("Calories", f"{recipe.get("calorie_count", "N/A")} calories per serving"),
+            ("Protein", f"{recipe.get("macros", {}).get("protein", "N/A")} protein per serving"),
+            ("Carbs", f"{recipe.get("macros", {}).get("carbohydrates", "N/A")} carbs per serving"),
+            ("Fat", f"{recipe.get("macros", {}).get("fat", "N/A")} fat per serving"),
+
         ]
 
         for label, value in details:
@@ -127,6 +132,7 @@ class RecipeDisplayScreen(MDScreen):
             details_grid.add_widget(detail_label)
 
         layout.add_widget(details_grid)
+
 
         dl_title = MDLabel(
             text="Diet Labels:",
