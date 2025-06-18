@@ -105,18 +105,29 @@ class RecipeDisplayScreen(MDScreen):
             adaptive_height=True,
         )
 
-        details = [
-            ("Prep Time", recipe["prep_time"]),
-            ("Cook Time", recipe["cook_time"]),
-            ("Total Time", recipe["total_time"]),
-            ("Cuisine", recipe["cuisine"]),
-            ("Servings", recipe["servings"]),
-            ("Course", recipe["meal_type"]),
-            ("Calories", f"{recipe["calorie_count"]} calories per serving"),
-            ("Protein", f"{recipe["macros"]["protein"]} protein per serving"),
-            ("Carbs", f"{recipe["macros"]["carbohydrates"]} carbs per serving"),
-            ("Fat", f"{recipe["macros"]["fat"]} fat per serving"),
+        prep_time = recipe.get("prep_time", "N/A")
+        cook_time = recipe.get("cook_time", "N/A")
+        total_time = recipe.get("total_time", "N/A")
+        cuisine = recipe.get("cuisine", "N/A")
+        servings = recipe.get("servings", "N/A")
+        meal_type = recipe.get("meal_type", "N/A")
+        calorie_count = recipe.get("calorie_count", "N/A")
+        macros = recipe.get("macros", {})
+        protein = macros.get("protein", "N/A")
+        carbohydrates = macros.get("carbohydrates", "N/A")
+        fat = macros.get("fat", "N/A")
 
+        details = [
+            ("Prep Time", prep_time),
+            ("Cook Time", cook_time),
+            ("Total Time", total_time),
+            ("Cuisine", cuisine),
+            ("Servings", servings),
+            ("Course", meal_type),
+            ("Calories", f"{calorie_count} calories per serving"),
+            ("Protein", f"{protein} protein per serving"),
+            ("Carbs", f"{carbohydrates} carbs per serving"),
+            ("Fat", f"{fat} fat per serving"),
         ]
 
         for label, value in details:
