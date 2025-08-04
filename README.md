@@ -1,1 +1,61 @@
 Made and Developed By Suhaan Thayyil(9th grader)
+
+Stable - Version 1.00 - May 29                                            
+
+    - Things to add in next  .1 update
+        - Popular Dishes - added
+    - Things to Fix
+        - One selection for some inputs
+        - change popular dishes directly to generate 
+
+    Version 1.0.1 - May 30
+        - Bugs Fixed 
+            - Space between info on recipe display screen 
+            - labels not being bold
+
+Stable - Version 1.1.0 - May 30 Night
+    - Features 
+        - Popular Dishes selection - added
+        - One selection for some inputs - added
+        - change popular dishes directly to generate - added
+    Version 1.1.1 - May 30 Night
+        - Bugs Fixed 
+            - allignment on Customize/Extra Details Screen
+    Version 1.1.2 - June 1 Morning
+        RELEASED ON THE APP STORE 
+        - Features added
+            - Ability to add ingredients button, added
+Stable - Version 1.2.0 - June 3
+    - Features 
+        - Customize Button on Popular Dishes
+        - Progress Bar
+Stable - Version 1.3.0 - June 4
+    - Features 
+        - Debugging
+        - Dialogs for errors 
+Stable - Version 1.5.0 - June 5
+    - Features 
+        - Bug fixes
+        - version bump/changed to match ios
+
+Stable - Version 1.6.0 - June 18
+    - Features 
+        - Calories and Macros 
+        
+Upcoming - Version 1.7.0 - Due Date June 31 
+    - Features 
+        - Saving Recipe Functionality(extra version because it is a major addition/change) 
+
+Upcoming - Version 2(Final/only bug fix updates after this) - Due Date July 31 
+    - Features 
+        - Editing Recipe Functionality 
+        
+
+
+
+
+
+
+
+
+        
