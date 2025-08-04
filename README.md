@@ -2,16 +2,16 @@ Made and Developed By Suhaan Thayyil(9th grader)
 
 Stable - Version 1.00 - May 29                                            
 
-    - Things to add in next  .1 update
-        - Popular Dishes - added
-    - Things to Fix
-        - One selection for some inputs
-        - change popular dishes directly to generate 
+- Things to add in next  .1 update
+    - Popular Dishes - added
+- Things to Fix
+    - One selection for some inputs
+    - change popular dishes directly to generate 
 
-    Version 1.0.1 - May 30
-        - Bugs Fixed 
-            - Space between info on recipe display screen 
-            - labels not being bold
+Version 1.0.1 - May 30
+    - Bugs Fixed 
+        - Space between info on recipe display screen 
+        - labels not being bold
 
 Stable - Version 1.1.0 - May 30 Night
     - Features 
@@ -42,11 +42,11 @@ Stable - Version 1.6.0 - June 18
     - Features 
         - Calories and Macros 
         
-Upcoming - Version 1.7.0 - Due Date June 31 
+Upcoming - Version 1.7.0 
     - Features 
         - Saving Recipe Functionality(extra version because it is a major addition/change) 
 
-Upcoming - Version 2(Final/only bug fix updates after this) - Due Date July 31 
+Upcoming - Version 2(Final/only bug fix updates after this) 
     - Features 
         - Editing Recipe Functionality 
         
